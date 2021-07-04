@@ -127,7 +127,8 @@ const fi = (function() {
     }, 
 
     flatten: function(nestedArr) {
-      
+      myArray = nestedArr.flat()
+      return myArray
     }, 
 
     uniq: function() {
