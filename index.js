@@ -136,11 +136,11 @@ const fi = (function() {
       return myArray
     }, 
 
-    uniq: function(array, isSorted,) {
+    uniq: function(array, isSorted = false,) {
       const myArray = [];
       let check;
 
-      if (isSorted !== undefined) {
+      if (isSorted === false ) {
         const sorted = array.sort(function(a, b){return a - b});
         sorted.forEach(item => {
           if (item !== check) {
