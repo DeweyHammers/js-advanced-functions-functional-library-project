@@ -139,18 +139,20 @@ const fi = (function() {
     uniq: function(array, isSorted = false,) {
       const myArray = [];
       let check;
-
       if (isSorted === false ) {
         const sorted = array.sort(function(a, b){return a - b});
-        sorted.forEach(item => {
-          if (item !== check) {
-            myArray.push(item)
-          }
-          check = item
-        });
+        if(typeof sorted[0] === 'object') {
+          
+        } else {
+          sorted.forEach(item => {
+            if (item !== check) {
+              myArray.push(item)
+            }
+            check = item
+          });
+        }
+        return myArray
       }
-      
-      return myArray
     }, 
 
     keys: function(object) {
