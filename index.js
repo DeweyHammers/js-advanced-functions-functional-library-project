@@ -44,11 +44,107 @@ const fi = (function() {
       return num
     },
 
-    functions: function() {
-
+    find: function(collection, callback) {
+      for(let i = 0; i < collection.length; i++) {
+        if (callback(collection[i])) {
+          return collection[i]
+        }
+      }
     },
 
+    filter: function(collection, callback) {
+      const array = [];
+      for(let i = 0; i < collection.length; i++) {
+        if(callback(collection[i])){
+          array.push(collection[i]);
+        }
+      }
+      return array;
+    }, 
 
+    size: function(collection) {
+      let size = 0;
+      if(Array.isArray(collection)) {
+        for(let i = 0; i < collection.length; i++) {
+          size += 1;
+        }
+      } else {
+        for (const [key, value] of Object.entries(collection)) {
+          size += 1;
+        }
+      }
+      return size;
+    },
+
+    first: function(collection, n) {
+      if(n !== undefined) {
+        let array = [];
+        for(let i = 0; i < n; i++) {
+          array.push(collection[i]);
+        }
+        return array;
+      } else {
+        return collection[0]
+      }
+    }, 
+
+    last: function(collection, n) {
+      if(n !== undefined) {
+        let array = [];
+        for(let i = (n - 2); i < collection.length; i++) {
+          array.push(collection[i]);
+        }
+        return array;
+      } else {
+        return collection[collection.length -1]
+      }
+    }, 
+
+    compact: function(collection) {
+      let array = [];
+      for (let i = 0; i < collection.length; i++) {
+        if(collection[i] !== 0) {
+          if(collection[i] !== "") {
+            if(collection[i] !== null) {
+              if (!Object.is(collection[i], NaN)) {
+                if (collection[i] !== false) {
+                  if (collection[i] !== undefined) {
+                    array.push(collection[i])
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      return array;
+    }, 
+
+    sortBy: function(array, callback) {
+      let myArray = []
+      array.forEach(item => { myArray.push(item)})
+      return myArray.sort(function(a, b){return callback(a)- callback(b)});
+    }, 
+
+    flatten: function(nestedArr) {
+      
+    }, 
+
+    uniq: function() {
+
+    }, 
+
+    keys: function() {
+
+    }, 
+
+    values: function() {
+
+    }, 
+
+    functions: function() {
+
+    }
   }
 })()
 
