@@ -126,25 +126,57 @@ const fi = (function() {
       return myArray.sort(function(a, b){return callback(a)- callback(b)});
     }, 
 
-    flatten: function(nestedArr) {
-      myArray = nestedArr.flat()
+    flatten: function(nestedArr, layerDeep) {
+      let myArray = []
+      if(layerDeep === true) {
+        myArray = nestedArr.flat(1)
+      } else {
+        myArray = nestedArr.flat(Infinity)
+      }
       return myArray
     }, 
 
-    uniq: function() {
+    uniq: function(array, isSorted,) {
+      const myArray = [];
+      let check;
 
+      if (isSorted !== undefined) {
+        const sorted = array.sort(function(a, b){return a - b});
+        sorted.forEach(item => {
+          if (item !== check) {
+            myArray.push(item)
+          }
+          check = item
+        });
+      }
+      
+      return myArray
     }, 
 
-    keys: function() {
-
+    keys: function(object) {
+      const myArray = [];
+      for (const [key, value] of Object.entries(object)) {
+        myArray.push(key)
+      }
+      return myArray
     }, 
 
-    values: function() {
-
+    values: function(object) {
+      const myArray = [];
+      for (const [key, value] of Object.entries(object)) {
+        myArray.push(value)
+      }
+      return myArray
     }, 
 
-    functions: function() {
-
+    functions: function(object) {
+      const myArray = [];
+      for (const [key, value] of Object.entries(object)) {
+        if(typeof value === 'function') {
+          myArray.push(key)
+        }
+      }
+      return myArray.sort(function(a, b){return a - b});
     }
   }
 })()
