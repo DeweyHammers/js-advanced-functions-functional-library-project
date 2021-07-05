@@ -136,24 +136,40 @@ const fi = (function() {
       return myArray
     }, 
 
-    uniq: function(array, isSorted = false,) {
+    uniq: function(array, isSorted = false, callback) {
       const myArray = [];
       let check;
       if (isSorted === false ) {
         const sorted = array.sort(function(a, b){return a - b});
         if(typeof sorted[0] === 'object') {
-          for(let i = 0; i < collection.length; i++) {
-            if(array[i] !== array[i + 1]){
-              myArray.push(array[i]);
+          for(let i = 0; i < array.length; i++) {
+            check = array[i + 1]
+            if (check === undefined) {
+              check = array[array.length -1]
+            }
+            if(array[i] !== check){
+              myArray.push(array[i])
             }
           }
-        } else {
+        } else if (callback === undefined) {
           sorted.forEach(item => {
             if (item !== check) {
               myArray.push(item)
             }
             check = item
           });
+        } else {
+          for (let i = 0; i < sorted.length; i++){
+            if(sorted[i] !== check) {
+              if (callback(sorted[i]) !== 0) {
+                myArray.push(sorted[i])
+              } else {
+                myArray.push(sorted[i])
+                break
+              }
+            check = sorted[i]
+            } 
+          }
         }
         return myArray
       }
