@@ -142,7 +142,11 @@ const fi = (function() {
       if (isSorted === false ) {
         const sorted = array.sort(function(a, b){return a - b});
         if(typeof sorted[0] === 'object') {
-          
+          for(let i = 0; i < collection.length; i++) {
+            if(array[i] !== array[i + 1]){
+              myArray.push(array[i]);
+            }
+          }
         } else {
           sorted.forEach(item => {
             if (item !== check) {
